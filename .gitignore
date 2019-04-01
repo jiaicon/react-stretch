@@ -4,7 +4,6 @@
 public.zip
 .idea/*
 .vscode/*
-.phpstorm/*
 
 # Compiled output
 index.js
