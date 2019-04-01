@@ -4,12 +4,10 @@
 public.zip
 .idea/*
 .vscode/*
+.phpstorm/*
 
 # Compiled output
-public/dist
-public/index.html
-public/sitemap.xml
-
+index.js
 # Node.js and NPM
 node_modules
 npm-debug.log
