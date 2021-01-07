@@ -17,7 +17,8 @@
     "classnames": "^2.2.6",
     "react": "^16.8.6",
     "react-autobind": "^1.0.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "url-loader": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",

@@ -8,6 +8,12 @@ module.exports = {
         filename: 'index.js',
         path: path.resolve(__dirname, '../'),
     },
+    resolve: {
+      // extension: [".js", ".jsx"],
+    //   alias: {
+    //     "@": path.resolve(__dirname, "../src")
+    //   }
+    },
     module: {
         rules: [
             {
@@ -18,11 +24,24 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
+            },
+          {
+            test: /\.(png|jpg|jpeg|gif|svg)/,
+            use: {
+              loader: 'url-loader',
+              options: {
+                outputPath: 'images/', // 图片输出的路径
+                limit: 10 * 1024
+              }
             }
+          }
         ]
     },
     devServer: {
-        contentBase: '../'
+      // 根目录下dist为基本目录
+      contentBase: path.resolve(__dirname, '../public'),
+      // 自动压缩代码
+      compress: true,
     },
     plugins: [
         new htmlWebpackPlugin({
