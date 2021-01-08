@@ -54,7 +54,7 @@ module.exports = {
         ]
     },
     devServer: {
-      // 根目录下dist为基本目录
+      // 根目录下public为基本目录
       contentBase: path.resolve(__dirname, '../public'),
       // 自动压缩代码
       compress: true,
