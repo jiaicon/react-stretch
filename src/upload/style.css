@@ -1,0 +1,7 @@
+.testImage {
+    display: inline-block;
+    background: url("/images/chong.png") no-repeat center;
+    width: 18px;
+    height: 18px;
+    background-size: contain;
+}
