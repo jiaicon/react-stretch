@@ -10,3 +10,4 @@ index.js
 # Node.js and NPM
 node_modules
 npm-debug.log
+yarn.lock

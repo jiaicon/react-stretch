@@ -3,11 +3,14 @@ const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
     mode: 'production',
-    entry: './src/upload/upload.js',
+    entry: './src/Stretch/index.tsx',
     output: {
         filename: 'index.js',
-        path: path.resolve(__dirname, '../'),
+        path: path.resolve(__dirname, '../dist/'),
         libraryTarget: 'commonjs2'
+    },
+    resolve: {
+      extensions: [".ts", ".tsx", ".js", "jsx", ".json"],
     },
     // build: {
     //   assetsPublicPath: '/',
@@ -24,16 +27,32 @@ module.exports = {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
             },
-          {
-            test: /\.(png|jpg|jpeg|gif|svg)/,
-            use: {
-              loader: 'url-loader',
-              options: {
-                outputPath: 'images/', // 图片输出的路径
-                limit: 10 * 1024
+            {
+              test: /\.tsx?$/,
+              loader: 'ts-loader'
+            },
+            {
+              test: /\.(png|jpg|jpeg|gif|svg)/,
+              use: {
+                loader: 'url-loader',
+                options: {
+                  name: '[name].[hash].[ext]',
+                  outputPath: 'images/', // 图片输出的路径
+                  limit: 10 * 1024
+                }
+              }
+            },
+            {
+              test: /\.(png|jpg|jpeg|gif|svg)/,
+              use: {
+                loader: 'file-loader',
+                options: {
+                  name: '[name].[hash].[ext]',
+                  outputPath: 'images/', // 图片输出的路径
+                  limit: 10 * 1024
+                }
               }
             }
-          }
         ]
     },
   devServer: {

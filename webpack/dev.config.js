@@ -3,16 +3,16 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    entry: './src/app.js',
+    entry: './src/app.tsx',
     output: {
         filename: 'index.js',
-        path: path.resolve(__dirname, '../'),
+        path: path.resolve(__dirname, '../dist/'),
     },
     resolve: {
-      // extension: [".js", ".jsx"],
-    //   alias: {
-    //     "@": path.resolve(__dirname, "../src")
-    //   }
+      extensions: [".ts", ".tsx", ".js", "jsx", ".json"],
+      alias: {
+        "@": path.join(__dirname, "../src")
+      }
     },
     module: {
         rules: [
@@ -26,15 +26,31 @@ module.exports = {
                 use: ['style-loader', 'css-loader']
             },
           {
-            test: /\.(png|jpg|jpeg|gif|svg)/,
-            use: {
-              loader: 'url-loader',
-              options: {
-                outputPath: 'images/', // 图片输出的路径
-                limit: 10 * 1024
-              }
-            }
-          }
+            test: /\.tsx?$/,
+            loader: 'ts-loader'
+          },
+          // {
+          //   test: /\.(png|jpg|jpeg|gif|svg)/,
+          //   use: {
+          //     loader: 'url-loader',
+          //     options: {
+          //       name: '[name].[hash].[ext]',
+          //       outputPath: 'images/', // 图片输出的路径
+          //       limit: 10 * 1024
+          //     }
+          //   }
+          // },
+          // {
+          //   test: /\.(png|jpg|jpeg|gif|svg)/,
+          //   use: {
+          //     loader: 'file-loader',
+          //     options: {
+          //       name: '[name].[hash].[ext]',
+          //       outputPath: 'images/', // 图片输出的路径
+          //       limit: 10 * 1024
+          //     }
+          //   }
+          // }
         ]
     },
     devServer: {
