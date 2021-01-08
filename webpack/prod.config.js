@@ -1,8 +1,6 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-const extractTextPlugin = require('extract-text-webpack-plugin');
-
-const extractCSS = new extractTextPlugin('css/[name].[hash:6].css');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   mode: 'production',
   entry: './src/Stretch/index.tsx',
@@ -24,17 +22,27 @@ module.exports = {
         use: 'babel-loader',
         exclude: /node_modules/
       },
+
       {
         test: /\.css$/,
-        use: extractTextPlugin.extract({
-          fallback: 'style-loader',
-          publicPath: '../',
-          use: [
-            {
-              loader: 'css-loader',
-            }
-          ]
-        })
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: ['autoprefixer'],
+              },
+              sourceMap: true,
+            },
+          },
+        ],
       },
       {
         test: /\.tsx?$/,
@@ -61,8 +69,12 @@ module.exports = {
       errors: true,
     },
     // 自动压缩代码
-    // compress: true,
+    compress: true,
   },
-  plugins: [extractCSS],
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[hash:6].css',
+    }),
+  ],
   externals: [nodeExternals()]
 };

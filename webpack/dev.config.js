@@ -1,6 +1,6 @@
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
     mode: 'development',
     entry: './src/app.tsx',
@@ -16,41 +16,60 @@ module.exports = {
     },
     module: {
         rules: [
-            {
-                test: /\.js$/,
-                use: 'babel-loader',
-                exclude: /node_modules/
-            },
-            {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            },
+          {
+            test: /\.js$/,
+            use: 'babel-loader',
+            exclude: /node_modules/
+          },
+          // {
+          //   test: /\.css$/,
+          //   use: extractTextPlugin.extract({
+          //     fallback: 'style-loader',
+          //     publicPath: '../',
+          //     use: [
+          //       {
+          //         loader: 'css-loader',
+          //       }
+          //     ]
+          //   })
+          // },
+          {
+            test: /\.css$/,
+            use: [
+              MiniCssExtractPlugin.loader,
+              {
+                loader: 'css-loader',
+                options: {
+                  sourceMap: true,
+                },
+              },
+              {
+                loader: 'postcss-loader',
+                options: {
+                  postcssOptions: {
+                    plugins: ['autoprefixer'],
+                  },
+                  sourceMap: true,
+                },
+              },
+            ],
+          },
           {
             test: /\.tsx?$/,
             loader: 'ts-loader'
           },
-          // {
-          //   test: /\.(png|jpg|jpeg|gif|svg)/,
-          //   use: {
-          //     loader: 'url-loader',
-          //     options: {
-          //       name: '[name].[hash].[ext]',
-          //       outputPath: 'images/', // 图片输出的路径
-          //       limit: 10 * 1024
-          //     }
-          //   }
-          // },
-          // {
-          //   test: /\.(png|jpg|jpeg|gif|svg)/,
-          //   use: {
-          //     loader: 'file-loader',
-          //     options: {
-          //       name: '[name].[hash].[ext]',
-          //       outputPath: 'images/', // 图片输出的路径
-          //       limit: 10 * 1024
-          //     }
-          //   }
-          // }
+          {
+            test:  /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+            use: {
+              loader: 'url-loader',
+              options: {
+                esModule: false,
+                name: 'images/[name].[hash:6].[ext]',
+                publicPath: '../',
+                limit: 10
+              }
+            }
+          }
         ]
     },
     devServer: {
@@ -60,6 +79,9 @@ module.exports = {
       compress: true,
     },
     plugins: [
+      new MiniCssExtractPlugin({
+        filename: '[name].css',
+      }),
         new htmlWebpackPlugin({
             template: 'public/index.html'
         })
