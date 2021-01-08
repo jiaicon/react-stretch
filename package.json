@@ -2,7 +2,7 @@
   "name": "react-stretch",
   "version": "0.1.7",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist",
   "scripts": {
     "build": "webpack --env.NODE_ENV=production",
     "dev": "webpack-dev-server",
