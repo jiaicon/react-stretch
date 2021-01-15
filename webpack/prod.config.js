@@ -59,7 +59,7 @@ module.exports = {
             esModule: false,
             name: 'images/[name].[hash:6].[ext]',
             publicPath: './../',
-            limit: 10
+            limit: 10 * 1024
           }
         }
       }
