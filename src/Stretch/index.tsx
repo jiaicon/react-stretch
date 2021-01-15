@@ -2,7 +2,7 @@
  * Created by icon on 2021/1/5
  */
 import React, { useState, useRef, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import useStretch from './../hooks/useStretch';
 import './styles.css';
 
 export interface IProps {
@@ -21,55 +21,22 @@ const Index: React.FC<IProps> = (props) => {
   const { children, className, maxWidth, maxHeight, btnIcon, style } = props;
   const [boxSize, setBoxSize] = useState(initState);
   const boxRef: any = useRef();
-  let disX = 0;
-  let disY = 0;
+  const distance = useStretch(boxRef);
   useEffect(() => {
-    return () => {
-      document.removeEventListener('mousemove', onMouseMove);
+    const width = boxSize.width + distance.x;
+    const height = boxSize.height + distance.y;
+    const bWidth = (maxWidth && width > maxWidth) ? maxWidth : width;
+    const bHeight = (maxHeight && height > maxHeight) ? maxHeight : height;
+    const state = {
+      width: bWidth,
+      height: bHeight,
     };
-  }, []);
-
-  const onMouseMove = (event: MouseEvent) => {
-    event.preventDefault();
-    const { pageX, pageY } = event;
-    const X = pageX - disX;
-    const Y = pageY - disY; //计算前后坐标的差值
-    const dragWidth = boxSize.width + X; //为宽度加上差值
-    const dragHeight = boxSize.height + Y; //为高度加上差值
-    let width=dragWidth;
-    let height=dragHeight;
-    if (maxWidth) {
-      if (dragWidth > maxWidth) {
-        width = maxWidth;
-      }
-    }
-    if (maxHeight) {
-      if (dragHeight > maxHeight) {
-        height = maxHeight;
-      }
-    }
-    setBoxSize({
-      width,
-      height,
-    });
-  };
-  const onMouseDown = () => {
-    const dom: any = ReactDOM.findDOMNode(boxRef.current);
-    if (dom) {
-      const e = dom.getBoundingClientRect();
-      disX = e.left;
-      disY = e.top;
-      document.addEventListener('mousemove', onMouseMove);
-      document.addEventListener('mouseup', () => {
-        document.removeEventListener('mousemove', onMouseMove);
-      });
-    }
-  };
+    setBoxSize(state);
+  }, [distance]);
 
   const BtnIcon = btnIcon || (<i
     ref={boxRef}
     className='dragIcon'
-    onMouseDown={onMouseDown}
   />);
 
   return (

@@ -3,7 +3,7 @@ const nodeExternals = require('webpack-node-externals');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   mode: 'production',
-  entry: './src/Stretch/index.tsx',
+  entry: path.resolve(__dirname, './../src/Stretch/index.tsx'),
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, '../dist/'),
@@ -22,28 +22,31 @@ module.exports = {
         use: 'babel-loader',
         exclude: /node_modules/
       },
-
       {
         test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: ['autoprefixer'],
-              },
-              sourceMap: true,
-            },
-          },
-        ],
+        use: ['style-loader', 'css-loader']
       },
+      // {
+      //   test: /\.css$/,
+      //   use: [
+      //     MiniCssExtractPlugin.loader,
+      //     {
+      //       loader: 'css-loader',
+      //       options: {
+      //         sourceMap: true,
+      //       },
+      //     },
+      //     {
+      //       loader: 'postcss-loader',
+      //       options: {
+      //         postcssOptions: {
+      //           plugins: ['autoprefixer'],
+      //         },
+      //         sourceMap: true,
+      //       },
+      //     },
+      //   ],
+      // },
       {
         test: /\.tsx?$/,
         loader: 'ts-loader'
@@ -55,8 +58,8 @@ module.exports = {
           options: {
             esModule: false,
             name: 'images/[name].[hash:6].[ext]',
-            publicPath: '../',
-            limit: 10 * 1024
+            publicPath: './../',
+            limit: 10
           }
         }
       }

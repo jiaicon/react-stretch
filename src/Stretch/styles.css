@@ -20,7 +20,8 @@
     -o-transition: all 300ms ease;
     transition: all 300ms ease;
 
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABDElEQVRIS82VzQ2CQBCF31CAiVTAQWIBno0/3aBFCEWo1Rhj4sEWDB6oAI/eGLPIbsAfEHZM5ETIMt+b93ZnCT9+6Mf1UQG4m/jEwE1DibNDuhyGNiIMwN1edmCeA5wwKFFFRQH9TbwnsAeQB84iW+XGBf2iAFo1yFlJQYxFGnBd+DN3fQ5zCCFMAz+SyUAVBaCtkYLUblMDscik8RzYQhoByrYcUrKvTSZfAdoUfF77n4A2lnXqoE3wnQAm+C9OfGfAJ8izfVaACqQYK+WRk882my2o/y2PFWZM1Xc108QAlU6K+0QMoNQzOZOH2uI+AR3TxWAs0kEZkFtG6F0Df/Ry4Uhk8a6GSMh14u6BHY0ZpudyHQAAAABJRU5ErkJggg==) no-repeat center;
+    /*background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABDElEQVRIS82VzQ2CQBCF31CAiVTAQWIBno0/3aBFCEWo1Rhj4sEWDB6oAI/eGLPIbsAfEHZM5ETIMt+b93ZnCT9+6Mf1UQG4m/jEwE1DibNDuhyGNiIMwN1edmCeA5wwKFFFRQH9TbwnsAeQB84iW+XGBf2iAFo1yFlJQYxFGnBd+DN3fQ5zCCFMAz+SyUAVBaCtkYLUblMDscik8RzYQhoByrYcUrKvTSZfAdoUfF77n4A2lnXqoE3wnQAm+C9OfGfAJ8izfVaACqQYK+WRk882my2o/y2PFWZM1Xc108QAlU6K+0QMoNQzOZOH2uI+AR3TxWAs0kEZkFtG6F0Df/Ry4Uhk8a6GSMh14u6BHY0ZpudyHQAAAABJRU5ErkJggg==) no-repeat center;*/
+    background: url("./../../public/images/collapse.png") no-repeat;
     background-size: cover;
     transform: rotate(180deg);
 }
