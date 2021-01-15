@@ -17,10 +17,8 @@ const initState = {
   width: 360,
   height: 200,
 };
-interface StretchType extends React.FC<IProps> {
-  useStretch: typeof useStretch;
-}
-const Index: StretchType = (props) => {
+
+const Index: React.FC<IProps> = (props) => {
   const { children, className, maxWidth, maxHeight, btnIcon, style } = props;
   const [boxSize, setBoxSize] = useState(initState);
   const boxRef: any = useRef();
@@ -57,6 +55,7 @@ const Index: StretchType = (props) => {
   );
 };
 
-Index.useStretch = useStretch;
-
+export {
+  useStretch,
+}
 export default Index;
