@@ -5,7 +5,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import useStretch from './../hooks/useStretch';
 import './styles.css';
 
-export interface IProps {
+export interface IProps{
   children?: React.ReactNode;
   className?: string;
   maxWidth?: number;
@@ -17,7 +17,10 @@ const initState = {
   width: 360,
   height: 200,
 };
-const Index: React.FC<IProps> = (props) => {
+interface StretchType extends React.FC<IProps> {
+  useStretch: typeof useStretch;
+}
+const Index: StretchType = (props) => {
   const { children, className, maxWidth, maxHeight, btnIcon, style } = props;
   const [boxSize, setBoxSize] = useState(initState);
   const boxRef: any = useRef();
@@ -53,5 +56,7 @@ const Index: React.FC<IProps> = (props) => {
     </div>
   );
 };
+
+Index.useStretch = useStretch;
 
 export default Index;

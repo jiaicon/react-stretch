@@ -12,11 +12,11 @@ interface Distance {
 }
 
 export type Target = BasicTarget<HTMLElement | Document>;
-export type ScrollListenController = (val: Distance) => boolean;
+export type DragListenController = (val: Distance) => boolean;
 let disX = 0;
 let disY = 0;
 // @ts-ignore
-const useStretch = (target?: Target, shouldUpdate: ScrollListenController = () => true) => {
+const useStretch = (target?: Target, shouldUpdate: DragListenController = () => true) => {
   const [distance, setDistance] = useState<Distance>({
     x: 0,
     y: 0,
